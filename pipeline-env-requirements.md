@@ -3,7 +3,7 @@
 
 # Jenkins Complete CI/CD Pipeline Environment Setup 
 
-1) Create a GitHub Repository `Jenkins-CI/CD-Pipeline-Project` and push the code in this branch(main) to 
+1) Create a GitHub Repository name `Jenkins-CICD-Pipeline-Project` and push the code in this branch(main) to 
     your remote repository (your newly created repository).
     - Go to GitHub (github.com)
     - Login to your GitHub Account
@@ -61,7 +61,7 @@
 
 8) Slack 
     - Go to the bellow Workspace and create a Private Slack Channel and name it "yourfirstname-jenkins-cicd-pipeline-alerts"
-    - Link: https://app.slack.com/client/T043JRQBB5L/C044F5PH3DE 
+    - Link: https://join.slack.com/t/jjtech-eagles-cicd/shared_invite/zt-1go3k7pz7-uSy3D4ai3Pb7KJk2G1sc1g 
 
 9) Configure Promitheus
     - Login/SSH to your Prometheus Server
