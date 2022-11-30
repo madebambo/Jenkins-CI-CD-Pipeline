@@ -1,5 +1,5 @@
 def COLOR_MAP = [
-    'SUCCESS': 'good', 
+    'SUCCESS': 'good',
     'FAILURE': 'danger',
 ]
 pipeline {
@@ -23,47 +23,47 @@ pipeline {
         }
       }
     }
-    stage('Unit Test'){
+    stage('Unit Test') {
         steps {
             sh 'mvn test'
         }
     }
-    stage('Integration Test'){
+    stage('Integration Test') {
         steps {
           sh 'mvn verify -DskipUnitTests'
         }
     }
-    stage ('Checkstyle Code Analysis'){
+    stage('Checkstyle Code Analysis') {
         steps {
             sh 'mvn checkstyle:checkstyle'
         }
         post {
             success {
-                echo 'Generated Analysis Result'
+          echo 'Generated Analysis Result'
             }
         }
     }
     stage('SonarQube Scan') {
       steps {
-        sh """mvn sonar:sonar \
+        sh '''mvn sonar:sonar \
               -Dsonar.projectKey=JavaWebApp \
               -Dsonar.host.url=http://172.31.4.143:9000 \
-              -Dsonar.login=e9733df3fcd6ed54cef307d8ac4cc00eeb2d3611"""
+              -Dsonar.login=e9733df3fcd6ed54cef307d8ac4cc00eeb2d3611'''
       }
     }
     stage('Upload to Artifactory') {
       steps {
-        sh "mvn clean deploy -DskipTests"
+        sh 'mvn clean deploy -DskipTests'
       }
     }
     stage('Deploy to DEV') {
       environment {
-        HOSTS = "dev"
+        HOSTS = 'dev'
       }
       steps {
         sh "ansible-playbook ${WORKSPACE}/deploy.yaml --extra-vars \"hosts=$HOSTS workspace_path=$WORKSPACE\""
       }
-     }
+    }
     // stage('Approval for stage') {
     //   steps {
     //     input('Do you want to proceed?')
@@ -71,7 +71,7 @@ pipeline {
     // }
     stage('Deploy to Stage') {
       environment {
-        HOSTS = "stage" // Make sure to update to "stage"
+        HOSTS = 'stage' // Make sure to update to "stage"
       }
       steps {
         sh "ansible-playbook ${WORKSPACE}/deploy.yaml --extra-vars \"hosts=$HOSTS workspace_path=$WORKSPACE\""
@@ -84,7 +84,7 @@ pipeline {
     }
     stage('Deploy to PROD') {
       environment {
-        HOSTS = "prod"
+        HOSTS = 'prod'
       }
       steps {
         sh "ansible-playbook ${WORKSPACE}/deploy.yaml --extra-vars \"hosts=$HOSTS workspace_path=$WORKSPACE\""
